@@ -36,7 +36,7 @@ public class GoalsController {
         Goal goal = goalService.findGoalById(id);
         model.addAttribute("goal", goal);
         model.addAttribute("user", authenticationService.getUserByAuthentication(authentication));
-//        model.addAttribute("user", userService.findUserByLogin(login));
+
         return "goal";
     }
     @GetMapping("/user/myGoals")

@@ -1,9 +1,11 @@
 package com.skyforce.goal.service.implementation;
 
+import com.skyforce.goal.model.Notification;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.UserFollowing;
 import com.skyforce.goal.repository.UserFollowingRepository;
 import com.skyforce.goal.service.FollowingService;
+import com.skyforce.goal.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class FollowingServiceImpl implements FollowingService {
     @Autowired
     private UserFollowingRepository userFollowingRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     @Transactional
     public void follow(User user, User following) {
@@ -31,6 +36,8 @@ public class FollowingServiceImpl implements FollowingService {
             return;
 
         entityManager.merge(userFollowing);
+        Notification notification = new Notification("+1 sub");
+        notificationService.notify(notification,following.getLogin());
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class RegistrationController {
@@ -71,27 +72,4 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
-    /*@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-    public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto,
-             BindingResult result, WebRequest request, Errors errors) {
-        User registered = new User();
-
-        if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
-        }
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
-        // rest of the implementation
-    }
-
-    private User createUserAccount(UserDto accountDto, BindingResult result) {
-        User registered = null;
-        try {
-            registered = service.registerNewUserAccount(accountDto);
-        } catch (EmailExistsException e) {
-            return null;
-        }
-        return registered;
-    }*/
 }

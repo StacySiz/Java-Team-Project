@@ -1,5 +1,6 @@
 package com.skyforce.goal.security.config;
 
+import com.skyforce.goal.filters.FilterFB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -22,6 +24,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private FilterFB filterFB = new FilterFB();
+
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
@@ -34,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
+        security.antMatcher("/**")
+                .addFilterBefore(filterFB.ssoFilter(), BasicAuthenticationFilter.class);
         security.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/user/**").authenticated()
@@ -44,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/*").permitAll()
                 .antMatchers("/templates/static/*").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers( "/connect**", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
