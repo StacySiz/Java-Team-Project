@@ -2,6 +2,7 @@ package com.skyforce.goal.model;
 
 import com.skyforce.goal.model.enums.GoalState;
 import lombok.*;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 
+@Document(indexName = "goal", type = "goal")
 @Entity
 @Table(name = "goals")
 public class Goal {

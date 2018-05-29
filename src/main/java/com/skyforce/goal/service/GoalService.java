@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import java.util.List;
 
 public interface GoalService {
-    List<Goal> findAll();
+    Iterable<Goal> findAll();
 
     Goal createGoal(GoalDto goalDto, Authentication authentication);
 

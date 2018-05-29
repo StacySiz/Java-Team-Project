@@ -6,7 +6,7 @@ import com.skyforce.goal.model.Goal;
 import com.skyforce.goal.model.MoneyHistoryEntry;
 import com.skyforce.goal.model.User;
 import com.skyforce.goal.model.enums.MoneyDirection;
-import com.skyforce.goal.repository.GoalRepository;
+import com.skyforce.goal.search.GoalRepository;
 import com.skyforce.goal.repository.MoneyHistoryEntryRepository;
 import com.skyforce.goal.model.enums.GoalState;
 import com.skyforce.goal.service.AuthenticationService;
@@ -37,8 +37,8 @@ public class GoalServiceImpl implements GoalService {
     }
 
     @Override
-    public List<Goal> findAll() {
-        return goalRepository.findAll();
+    public Iterable<Goal> findAll() {
+        return  goalRepository.findAll();
     }
 
     @Override

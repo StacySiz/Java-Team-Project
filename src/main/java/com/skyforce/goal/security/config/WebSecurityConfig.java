@@ -1,6 +1,6 @@
 package com.skyforce.goal.security.config;
 
-import com.skyforce.goal.filters.FilterFB;
+//import com.skyforce.goal.filters.FilterFB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private FilterFB filterFB = new FilterFB();
+   // private FilterFB filterFB = new FilterFB();
 
     @Autowired
     private AuthenticationProvider authenticationProvider;
@@ -39,8 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
-        security.antMatcher("/**")
-                .addFilterBefore(filterFB.ssoFilter(), BasicAuthenticationFilter.class);
+        security.antMatcher("/**");
+                //.addFilterBefore(filterFB.ssoFilter(), BasicAuthenticationFilter.class);
         security.authorizeRequests()
                 .antMatchers("/admin/*").hasAuthority("ADMIN")
                 .antMatchers("/user/**").authenticated()

@@ -7,7 +7,7 @@ import com.skyforce.goal.service.AuthenticationService;
 import com.skyforce.goal.service.FollowingService;
 import com.skyforce.goal.service.GoalService;
 import com.skyforce.goal.service.UserService;
-import com.skyforce.goal.validator.GoalFormValidator;
+import com.skyforce.goal.validation.GoalFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <div th:include="fragments/header :: head"></div>
+
+    <title>Document</title>
+
+    <style>
+        #main-content {
+            padding-top: 4.5%;
+            padding-left: 0.5%;
+            float: left;
+        }
+
+        #description {
+            overflow: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+<div th:include="fragments/header :: navbar"></div>
+
+<form action="#" th:action="@{/}" th:object="${search}">
+    <input name="search"
+           id="search">
+    </input>
+    <div th:if="${not #lists.isEmpty(search)}">
+        <h2>Search Results</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="search : ${search}">
+                <td th:text="${search.name}">Text ...</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+</body>
+</html>
